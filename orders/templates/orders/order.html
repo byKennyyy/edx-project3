@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Project 3</title>
+		<!--Bootstrap-->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+		<!--Font awesome-->
+		<script src="https://kit.fontawesome.com/6878bbf26a.js" crossorigin="anonymous"></script>
+		<!--Jquery-->
+		<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	</head>
+	<body>
+		<div class="container" style="padding-top: 5%">
+			<small>You are logged in as {{user.username}}</small>
+			<br>
+			<small><a href="{% url 'logout' %}" style="text-decoration: none;">Logout</a></small>
+			<small class="float-right"><a href="{% url 'pending' %}" style="text-decoration: none;">Go back</a></small>
+			<hr>
+			<div class="row">
+				<div class="col-lg-6">
+					<h3>Menu</h3>
+					<hr>
+					<h6>Regular pizza</h6>
+					<table class="table table-striped">
+					  	<tbody>
+					  		{% for pizza in regular %}
+					  			<tr>
+					  				<form method="post" action="{% url 'add' item=pizza.item %}">
+					  					{% csrf_token %}
+					  					<td>{{pizza.item}}</td>
+							      		<td></td>
+							    		<td></td>
+							    		<td></td>
+							      		<td>
+							      			<select class="form-control" name="size">
+							      				<option value="{{pizza.small}}">Small</option>
+							      				<option value="{{pizza.large}}">Large</option>
+							      			</select>
+							      		</td>
+							      		<td><button type="submit" class="text-success" style="border: none; outline: none; background-color: transparent;"><i class="fas fa-plus"></i></button></td>
+					  				</form>
+						    	</tr>
+					  		{% endfor %}
+					  	</tbody>
+					</table>
+					<hr>
+					<h6>Sicilian pizza</h6>
+					<table class="table table-striped">
+						<thead>
+					    	<tr>
+					      		<th></th>
+					      		<th></th>
+					      		<th></th>
+					      		<th></th>
+					    	</tr>
+					  	</thead>
+					  	<tbody>
+					    	{% for pizza in sicilian %}
+					  			<tr>
+					  				<form method="post" action="{% url 'add' item=pizza.item %}">
+					  					{% csrf_token %}
+					  					<td>{{pizza.item}}</td>
+							      		<td></td>
+							    		<td></td>
+							    		<td></td>
+							      		<td>
+							      			<select class="form-control" name="size">
+							      				<option value="{{pizza.small}}">Small</option>
+							      				<option value="{{pizza.large}}">Large</option>
+							      			</select>
+							      		</td>
+							      		<td><button type="submit" class="text-success" style="border: none; outline: none; background-color: transparent;"><i class="fas fa-plus"></i></button></td>
+					  				</form>
+						    	</tr>
+					  		{% endfor %}
+					  	</tbody>
+					</table>
+					<hr>
+					<h6>Topping</h6>
+					<table class="table table-striped">
+						<thead>
+					    	<tr>
+					      		<th></th>
+					      		<th></th>
+					      		<th></th>
+					      		<th></th>
+					    	</tr>
+					  	</thead>
+					  	<tbody>
+					    	{% for topping in toppings %}
+					  			<tr>
+					  				<td>{{topping.name}}</td>
+						    	</tr>
+					  		{% endfor %}
+					  	</tbody>
+					</table>
+					<hr>
+					<h6>Subs</h6>
+					<table class="table table-striped">
+						<thead>
+					    	<tr>
+					      		<th></th>
+					      		<th></th>
+					      		<th></th>
+					      		<th></th>
+					    	</tr>
+					  	</thead>
+					  	<tbody>
+					    	{% for sub in subs %}
+					  			<tr>
+					  				<form method="post" action="{% url 'add' item=sub.item %}">
+					  					{% csrf_token %}
+					  					<td>{{sub.item}}</td>
+							      		<td></td>
+							    		<td></td>
+							    		<td></td>
+							      		<td>
+							      			<select class="form-control" name="size">
+							      				<option value="{{sub.small}}">Small</option>
+							      				<option value="{{sub.large}}">Large</option>
+							      			</select>
+							      		</td>
+							      		<td><button type="submit" class="text-success" style="border: none; outline: none; background-color: transparent;"><i class="fas fa-plus"></i></button></td>
+					  				</form>
+						    	</tr>
+					  		{% endfor %}
+					  	</tbody>
+					</table>
+					<hr>
+					<h6>Pasta</h6>
+					<table class="table table-striped">
+						<thead>
+					    	<tr>
+					      		<th></th>
+					      		<th></th>
+					      		<th></th>
+					      		<th></th>
+					      		<th scope="col">Price</th>
+					    	</tr>
+					  	</thead>
+					  	<tbody>
+					    	{% for pasta in pastas %}
+					  			<tr>
+					  				<form method="post" action="{% url 'add' item=pasta.name %}">
+					  					{% csrf_token %}
+					  					<td>{{pasta.name}}</td>
+							      		<td></td>
+							    		<td></td>
+							    		<td></td>
+							      		<td><input type="hidden" name="size" value="{{pasta.price}}">{{pasta.price}}</td>
+							      		<td><button type="submit" class="text-success" style="border: none; outline: none; background-color: transparent;"><i class="fas fa-plus"></i></button></td>
+					  				</form>
+						    	</tr>
+					  		{% endfor %}
+					  	</tbody>
+					</table>
+					<hr>
+					<h6>Salad</h6>
+					<table class="table table-striped">
+						<thead>
+					    	<tr>
+					      		<th></th>
+					      		<th></th>
+					      		<th></th>
+					      		<th></th>
+					      		<th scope="col">Price</th>
+					    	</tr>
+					  	</thead>
+					  	<tbody>
+					    	{% for salad in salads %}
+					  			<tr>
+					  				<form method="post" action="{% url 'add' item=salad.name %}">
+					  					{% csrf_token %}
+					  					<td>{{salad.name}}</td>
+							      		<td></td>
+							    		<td></td>
+							    		<td></td>
+							      		<td><input type="hidden" name="size" value="{{salad.price}}">{{salad.price}}</td>
+							      		<td><button type="submit" class="text-success" style="border: none; outline: none; background-color: transparent;"><i class="fas fa-plus"></i></button></td>
+					  				</form>
+						    	</tr>
+					  		{% endfor %}
+					  	</tbody>
+					</table>
+					<hr>
+					<h6>Dinner</h6>
+					<table class="table table-striped">
+						<thead>
+					    	<tr>
+					      		<th></th>
+					      		<th></th>
+					      		<th></th>
+					      		<th></th>
+					    	</tr>
+					  	</thead>
+					  	<tbody>
+					    	{% for dinner in dinners %}
+					  			<tr>
+					  				<form method="post" action="{% url 'add' item=dinner.item %}">
+					  					{% csrf_token %}
+					  					<td>{{dinner.item}}</td>
+							      		<td></td>
+							    		<td></td>
+							    		<td></td>
+							      		<td>
+							      			<select class="form-control" name="size">
+							      				<option value="{{dinner.small}}">Small</option>
+							      				<option value="{{dinner.large}}">Large</option>
+							      			</select>
+							      		</td>
+							      		<td><button type="submit" class="text-success" style="border: none; outline: none; background-color: transparent;"><i class="fas fa-plus"></i></button></td>
+					  				</form>
+						    	</tr>
+					  		{% endfor %}
+					  	</tbody>
+					</table>
+				</div>
+				<div class="col-lg-6">
+					<h3>Shopping cart</h3>
+					<hr>
+					<div class="row">
+						{% for cart in carts %}
+							<div class="col-lg-9">{{ cart.item }}<hr></div>
+							<div class="col-lg-2">{{ cart.price }}<hr></div>
+							<div class="col-lg-1"><form method="post" action="{% url 'remove' id=cart.id %}">{% csrf_token %}<button class="btn btn-success">&minus;</button></form></div>
+						{% endfor %}
+					</div>
+					<!-- Button trigger modal -->
+					<button id="order" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin-top: 5%;">
+						Place order
+					</button>
+					<!-- Modal -->
+					<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-lg" role="document">
+					    	<div class="modal-content">
+					      		<div class="modal-header">
+					        		<h5 class="modal-title" id="exampleModalLabel">Order details</h5>
+					        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          			<span aria-hidden="true">&times;</span>
+					        		</button>
+					      		</div>
+					      		<div class="modal-body">
+					        		Customer: {{ user.username }} <br>
+					        		<hr>
+					        		Items:
+					        		{{ description }} <br>
+					        		<hr>
+					        		Total:
+					        		{{ total }} <br>
+					      		</div>
+					      		<div class="modal-footer">
+					        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					        		<form method="post" action="{% url 'order' %}">
+					        			{% csrf_token %}
+					        			<button type="submit" class="btn btn-primary">Place order</button>
+					        		</form>
+					      		</div>
+					    	</div>
+					  	</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			$("#order").click(() => {
+				$("#exampleModal").modal(option);
+			})
+		</script>
+		<!--Bootstrap JS-->
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+		<!---------------->
+	</body>
+</html>

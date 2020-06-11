@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Project 3</title>
+		<!--Bootstrap-->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	</head>
+	<body>
+		<div class="container" style="padding-top: 15%">
+			{% if message %}
+				<div class="alert alert-primary" role="alert">
+					{{ message }}
+				</div>
+			{% endif %}
+			<form method="post" action="{% url 'login' %}">
+				{% csrf_token %}
+				<div class="form-group">
+					<label for="user">Username</label>
+					<input type="text" class="form-control" id="user" name="user" autocomplete="off">
+			  	</div>
+			  	<div class="form-group">
+			    	<label for="password">Password</label>
+			    	<input type="password" class="form-control" id="password" name="password">
+			  	</div>
+			  	<button type="submit" class="btn btn-primary">Login</button>
+			</form>
+			<a href="{% url 'register' %}" style="display: block; padding-top: 2%; text-decoration: none;">Registration</a>
+		</div>
+	</body>
+</html>

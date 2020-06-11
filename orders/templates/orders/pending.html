@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Project 3</title>
+		<!--Bootstrap-->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	</head>
+	<body>
+		<div class="container" style="padding-top: 5%;">
+			<small class="float-right"><a href="{% url 'logout' %}" style="text-decoration: none;">Logout</a></small>
+			<h6>Your orders</h6>
+			<hr>
+			<div class="row">
+				{% for order in orders %}
+					{% if order.user == user.username %}
+						<div class="col-lg-6">{{order.user}}<hr></div>
+						<div class="col-lg-3">{{order.description}}<hr></div>
+						{% if order.finished %}
+							<div class="col-lg-3 text-success">Ready<hr></div>
+						{% else %}
+							<div class="col-lg-3 text-danger">Not ready<hr></div>
+						{% endif %}
+					{% endif%}
+				{% endfor %}
+			</div>
+			<a href="{% url 'cart' %}">Make an order</a>
+		</div>
+	</body>
+</html>
